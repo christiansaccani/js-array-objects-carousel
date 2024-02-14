@@ -37,6 +37,7 @@ console.log(images);
 
 // bersagliamo lo slider
 const sliderElement = document.getElementById("slider");
+const thumbElement = document.getElementById("thumbnail");
 
 
 // tramite un ciclo for prendiamo ogni indirizzo delle immagini dall'array di oggetti
@@ -48,6 +49,30 @@ for (let i = 0; i < images.length; i++) {
     sliderElement.append(newPicElement);
 
 }
+
+for (let i = 0; i < images.length; i++) {
+
+    // per ognuno di essi andremo a creare un elemento img dentro lo slider
+    const newPicElement = document.createElement('img');
+    newPicElement.src = images[i].image;
+    thumbElement.append(newPicElement);
+
+    newPicElement.addEventListener("click", function() {
+
+
+        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+
+        // - aumento il contatore di 1
+        slideNumber = i + 1;
+
+        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
+        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
+    })
+
+}
+
+
+
 
 document.querySelector("#slider img:nth-of-type(1)").className = "active";
 
