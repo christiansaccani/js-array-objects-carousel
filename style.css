@@ -28,6 +28,14 @@
     overflow: hidden;
 }
 
+#didascalia {
+    position: absolute;
+    bottom: 10%;
+    right: 0%;
+
+    color: whitesmoke;
+}
+
 #thumbnail {
     position: relative;
     left: 10%;
@@ -99,6 +107,18 @@
 #buttons {
     margin-top: 1em;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
+}
+
+#buttons button {
+    background-color: #810103;
+    color: whitesmoke;
+    border: 1ps solid #39434f;
+
+    border-radius: 12px;
+
+    padding: 0.7em;
+    font-size: 1em;
+    font-weight: 600;
 }

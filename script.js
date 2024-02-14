@@ -56,6 +56,8 @@ for (let i = 0; i < images.length; i++) {
     const newPicElement = document.createElement('img');
     newPicElement.src = images[i].image;
     thumbElement.append(newPicElement);
+    
+    
 
     newPicElement.addEventListener("click", function() {
 
@@ -145,19 +147,20 @@ document.getElementById("autoplay").addEventListener("click", startAutoplay);
 document.getElementById("stop").addEventListener("click", stopAutoPlay);
 document.getElementById("reverse").addEventListener("click", startReverseplay);
 
+let intervallo; // dichiarazione globale del timer
+
 function startAutoplay() {
-    intervallo = setInterval(function() {
-        foward()
-    }, 3000);
+    clearInterval(intervallo); // Ferma il timer corrente, se presente
+    intervallo = setInterval(foward, 3000);
 }
 
 function startReverseplay() {
-    intervallo = setInterval(function() {
-        backward()
-    }, 3000);
+    clearInterval(intervallo); // Ferma il timer corrente, se presente
+    intervallo = setInterval(backward, 3000);
 }
 
 function stopAutoPlay() {
     clearInterval(intervallo);
+    intervallo = null; // reimposta il timer a null quando viene fermato
     console.log("Stopped");
 }
