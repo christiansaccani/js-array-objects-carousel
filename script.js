@@ -52,7 +52,7 @@ for (let i = 0; i < images.length; i++) {
 
 for (let i = 0; i < images.length; i++) {
 
-    // per ognuno di essi andremo a creare un elemento img dentro lo slider
+    // stesso procedimento di prima per la thumb
     const newPicElement = document.createElement('img');
     newPicElement.src = images[i].image;
     thumbElement.append(newPicElement);
@@ -62,26 +62,16 @@ for (let i = 0; i < images.length; i++) {
 
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
 
-        // - aumento il contatore di 1
+        // rendo il contatore corrispondente all'immagine selezionata
         slideNumber = i + 1;
 
-        // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
+        // aggiungo la classe "active" all'immagine selezionata
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
     })
 
 }
 
-
-
-
-document.querySelector("#slider img:nth-of-type(1)").className = "active";
-
-// -  salvo un contatore della slide
-let slideNumber = 1;
-
-// -  QUANDO premo la freccia SU
-document.querySelector("#up-arrow").addEventListener("click", function() {
-
+function foward() {
     if (slideNumber < images.length) {
 
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
@@ -106,10 +96,9 @@ document.querySelector("#up-arrow").addEventListener("click", function() {
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
     }       
-});
+}
 
-document.querySelector("#down-arrow").addEventListener("click", function() {
-
+function backward() {
     if (slideNumber > 1) {
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
@@ -132,5 +121,43 @@ document.querySelector("#down-arrow").addEventListener("click", function() {
 
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
+
     }
+}
+
+document.querySelector("#slider img:nth-of-type(1)").className = "active";
+
+// -  salvo un contatore della slide
+let slideNumber = 1;
+
+// -  QUANDO premo la freccia SU
+document.querySelector("#up-arrow").addEventListener("click", function() {
+
+    foward(); 
 });
+
+document.querySelector("#down-arrow").addEventListener("click", function() {
+
+    backward(); 
+});
+
+document.getElementById("autoplay").addEventListener("click", startAutoplay);
+document.getElementById("stop").addEventListener("click", stopAutoPlay);
+document.getElementById("reverse").addEventListener("click", startReverseplay);
+
+function startAutoplay() {
+    intervallo = setInterval(function() {
+        foward()
+    }, 3000);
+}
+
+function startReverseplay() {
+    intervallo = setInterval(function() {
+        backward()
+    }, 3000);
+}
+
+function stopAutoPlay() {
+    clearInterval(intervallo);
+    console.log("Stopped");
+}
