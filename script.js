@@ -156,7 +156,9 @@ document.getElementById("autoplay").addEventListener("click", startAutoplay);
 document.getElementById("stop").addEventListener("click", stopAutoPlay);
 document.getElementById("reverse").addEventListener("click", startReverseplay);
 
-let intervallo; // dichiarazione globale del timer
+// --- SET TIMER --- //
+
+let intervallo = setInterval(foward, 3000); // dichiaro globalmente il timer e lo avvio di default
 
 function startAutoplay() {
     clearInterval(intervallo); // per fermare il timer corrente, se presente
