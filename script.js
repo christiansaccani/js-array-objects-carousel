@@ -41,24 +41,40 @@ const thumbElement = document.getElementById("thumbnail");
 
 
 // tramite un ciclo for prendiamo ogni indirizzo delle immagini dall'array di oggetti
-images.forEach(image => {
-    const newPicElement = document.createElement('img');
-    newPicElement.src = image.image;
-    sliderElement.append(newPicElement);
+images.forEach(element => {
+    sliderElement.innerHTML += `    
+    <section class="slide">
+
+        <img src="./${element.image}" alt="immagine 1">
+
+        <div class="details">
+
+            <h3 class="title">
+                ${element.title}
+            </h3>
+
+            <div class="text">
+                ${element.text}
+            </div>
+        
+        </div>
+        
+    </section>
+    `;
 });
 
-images.forEach((image, i) => {
+images.forEach((element, index) => {
     const newPicElement = document.createElement('img');
-    newPicElement.src = image.image;
+    newPicElement.src = element.image;
     thumbElement.append(newPicElement);
 
     newPicElement.addEventListener("click", function() {
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.remove("activeThumb");
 
-        slideNumber = i + 1;
+        slideNumber = index + 1;
 
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.add("activeThumb");
     })
 });
@@ -67,14 +83,14 @@ function foward() {
     if (slideNumber < images.length) {
 
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.remove("activeThumb");
 
         // - aumento il contatore di 1
         slideNumber++;
 
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.add("activeThumb");
 
         console.log(slideNumber);
@@ -82,14 +98,14 @@ function foward() {
     } else {
 
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.remove("activeThumb");
 
         // resetto la variabile che mi conta l'immagine a cui sono arrivato
         slideNumber = 1;
 
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.add("activeThumb");
     }       
 }
@@ -97,14 +113,14 @@ function foward() {
 function backward() {
     if (slideNumber > 1) {
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.remove("activeThumb");
 
         // - diminuisco il contatore di 1
         slideNumber--;
 
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.add("activeThumb");
 
         console.log(slideNumber);
@@ -112,21 +128,21 @@ function backward() {
     } else {
 
         // - prendo l'immagine attuale e le rimuovo la classe "active"  
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.remove("activeThumb");
 
         // - metto il valore di slideNumebr = alla posizione dell'ultima immagine
         slideNumber = images.length;
 
         // - prendo l'immagine con il nuovo contatore e le aggiungo la classe "active"
-        document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
+        document.querySelector(`#slider .slide:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.add("activeThumb");
 
     }
 }
 
-document.querySelector("#slider img:nth-of-type(1)").className = "active";
-document.querySelector("#thumbnail img:nth-of-type(1)").className = "activeThumb";
+document.querySelector("#slider .slide:nth-of-type(1)").classList.add("active");
+document.querySelector("#thumbnail img:nth-of-type(1)").classList.add("activeThumb");
 
 // -  salvo un contatore della slide
 let slideNumber = 1;
@@ -134,12 +150,12 @@ let slideNumber = 1;
 // -  QUANDO premo la freccia SU
 document.querySelector("#up-arrow").addEventListener("click", function() {
 
-    foward(); 
+    backward(); 
 });
 
 document.querySelector("#down-arrow").addEventListener("click", function() {
 
-    backward(); 
+    foward(); 
 });
 
 document.getElementById("autoplay").addEventListener("click", startAutoplay);

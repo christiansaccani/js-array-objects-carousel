@@ -3,24 +3,28 @@
     padding: 0;
     box-sizing: border-box;
     
+    font-family: sans-serif;
 }
 
 .container {
-    max-width: 950px;
+    /* max-width: 950px; */
     margin: 0 auto;
 
     margin-top: 2em;
     user-select: none; 
 
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
 #slider {
     position: relative;
-    left: 10%;
 
     height: 500px;
     max-width: 750px;
+    width: 100%;
 
     border: 6px solid gray;
     border-radius: 24px;
@@ -28,23 +32,15 @@
     overflow: hidden;
 }
 
-#didascalia {
-    position: absolute;
-    bottom: 10%;
-    right: 0%;
-
-    color: whitesmoke;
-}
-
 #thumbnail {
     position: relative;
-    left: 10%;
 
-    margin-top: 1em;
-    max-width: 750px;
-    height: 100px;
+    margin-left: 1em;
+    max-width: 150px;
+    height: 500px;
 
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
 
@@ -58,7 +54,7 @@
 #thumbnail img {
     max-width: 140px;
     width: 100%;
-    height: 100%;
+    height: calc(500px / 5 - 5px);
 
     border: 2px solid gray;
     border-radius: 24px;
@@ -72,7 +68,7 @@
     border-color: whitesmoke;
 }
 
-#slider img:not(.active) {
+#slider .slide:not(.active) {
     display: none;
 }
 
@@ -113,7 +109,8 @@
 #buttons {
     margin-top: 1em;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
+    gap: 2em;
     align-items: center;
 }
 
@@ -127,4 +124,74 @@
     padding: 0.7em;
     font-size: 1em;
     font-weight: 600;
+}
+
+/* stilizzazione .slide */
+#slider .slide {
+    position: relative;
+
+    height: 100%;
+}
+
+
+#slider .slide:not(.active) {
+    display: none;
+}
+
+
+
+#slider .slide .details {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+
+    color: white;
+    background-color: rgba(128, 128, 128, 0.75);
+
+    width: 100%;
+    padding: 18px;
+    padding-bottom: 36px;
+
+    text-align: right;
+}
+
+.details .title {
+    margin-bottom: .4em;
+}
+
+
+
+#slider #arrows {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 12px;
+
+    color: white;
+    font-size: 1.5em;
+    text-shadow: 1px 4px 3px black;
+
+    
+}
+
+#slider #arrows > * {
+    transform: scale(1);
+
+    transition: transform 0.4s ease;
+}
+
+#slider #arrows > *:hover {
+    cursor: pointer;
+
+    transform: scale(1.2);
 }
