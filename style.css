@@ -66,6 +66,12 @@
     object-fit: cover;
 }
 
+
+#thumbnail .activeThumb {
+    box-shadow: 8px 8px 8px gray;
+    border-color: whitesmoke;
+}
+
 #slider img:not(.active) {
     display: none;
 }
