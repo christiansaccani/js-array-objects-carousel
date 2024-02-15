@@ -148,15 +148,9 @@ document.querySelector("#thumbnail img:nth-of-type(1)").classList.add("activeThu
 let slideNumber = 1;
 
 // -  QUANDO premo la freccia SU
-document.querySelector("#up-arrow").addEventListener("click", function() {
+document.querySelector("#up-arrow").addEventListener("click", backward)
 
-    backward(); 
-});
-
-document.querySelector("#down-arrow").addEventListener("click", function() {
-
-    foward(); 
-});
+document.querySelector("#down-arrow").addEventListener("click", foward)
 
 document.getElementById("autoplay").addEventListener("click", startAutoplay);
 document.getElementById("stop").addEventListener("click", stopAutoPlay);
