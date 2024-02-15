@@ -41,36 +41,27 @@ const thumbElement = document.getElementById("thumbnail");
 
 
 // tramite un ciclo for prendiamo ogni indirizzo delle immagini dall'array di oggetti
-for (let i = 0; i < images.length; i++) {
-
-    // per ognuno di essi andremo a creare un elemento img dentro lo slider
+images.forEach(image => {
     const newPicElement = document.createElement('img');
-    newPicElement.src = images[i].image;
+    newPicElement.src = image.image;
     sliderElement.append(newPicElement);
+});
 
-}
-
-for (let i = 0; i < images.length; i++) {
-
-    // stesso procedimento di prima per la thumb
+images.forEach((image, i) => {
     const newPicElement = document.createElement('img');
-    newPicElement.src = images[i].image;
+    newPicElement.src = image.image;
     thumbElement.append(newPicElement);
 
     newPicElement.addEventListener("click", function() {
-
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.remove("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.remove("activeThumb");
 
-        // rendo il contatore corrispondente all'immagine selezionata
         slideNumber = i + 1;
 
-        // aggiungo la classe "active" all'immagine selezionata
         document.querySelector(`#slider img:nth-of-type(${slideNumber})`).classList.add("active");
         document.querySelector(`#thumbnail img:nth-of-type(${slideNumber})`).classList.add("activeThumb");
     })
-
-}
+});
 
 function foward() {
     if (slideNumber < images.length) {
